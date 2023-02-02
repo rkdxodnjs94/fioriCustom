@@ -1,0 +1,23 @@
+<mvc:View xmlns:core="sap.ui.core" 
+  xmlns:mvc="sap.ui.core.mvc" 
+  xmlns="sap.m" 
+  xmlns:macros="sap.fe.macros"
+  xmlns:html="http://www.w3.org/1999/xhtml" 
+  controllerName="com.mdpert.laptop.ext.main.Main">
+  <Page id="Main" title="Main">
+    <content>
+      <macros:FilterBar 
+        metaPath="@com.sap.vocabularies.UI.v1.SelectionFields" 
+        id="FilterBar" 
+        search=".handlers.onSearch" 
+        filterChanged=".handlers.onFiltersChanged"/>
+        <macros:Chart 
+          id="Chart" 
+          metaPath="@com.sap.vocabularies.UI.v1.Chart#SalesManufacturer" 
+          contextPath="/OrderedProduct" 
+          filterBar="FilterBar" 
+          personalization="Type,Item,Sort" 
+          selectionMode="Single"/>
+    </content>
+  </Page>
+</mvc:View>

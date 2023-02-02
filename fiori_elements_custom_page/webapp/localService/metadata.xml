@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="SalesService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Product" EntityType="SalesService.Product"/>
+                <EntitySet Name="Order" EntityType="SalesService.Order">
+                    <NavigationPropertyBinding Path="serialNumber_code" Target="Product"/>
+                </EntitySet>
+                <EntitySet Name="Manufacturer" EntityType="SalesService.Manufacturer">
+                    <NavigationPropertyBinding Path="manufacturer_code" Target="Product"/>
+                </EntitySet>
+                <EntitySet Name="OrderedProduct" EntityType="SalesService.OrderedProduct"/>
+            </EntityContainer>
+            <EntityType Name="Product">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <Property Name="price" Type="Edm.Int32"/>
+                <Property Name="manufacturer" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Order">
+                <Key>
+                    <PropertyRef Name="orderNumber"/>
+                </Key>
+                <Property Name="orderNumber" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="serialNumber_code" Type="SalesService.Product">
+                    <ReferentialConstraint Property="serialnumber" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="serialnumber" Type="Edm.String"/>
+                <Property Name="rating" Type="Edm.Decimal" Scale="1" Precision="10"/>
+                <Property Name="deliveryTime" Type="Edm.Int32"/>
+                <Property Name="quantity" Type="Edm.Int32"/>
+                <Property Name="orderDate" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
+            <EntityType Name="Manufacturer">
+                <NavigationProperty Name="manufacturer_code" Type="SalesService.Product"/>
+                <Property Name="manufacturer" Type="Edm.String"/>
+                <Property Name="countryCode" Type="Edm.String"/>
+                <Property Name="foundingYear" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="OrderedProduct">
+                <Key>
+                    <PropertyRef Name="serialnumber"/>
+                </Key>
+                <Property Name="orderNumber" Type="Edm.Int32"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="serialnumber" Type="Edm.String" Nullable="false"/>
+                <Property Name="price" Type="Edm.Int32"/>
+                <Property Name="manufacturer" Type="Edm.String"/>
+                <Property Name="rating" Type="Edm.Decimal" Scale="1" Precision="10"/>
+                <Property Name="deliveryTime" Type="Edm.Int32"/>
+                <Property Name="quantity" Type="Edm.Int32"/>
+                <Property Name="orderDate" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
+            <Annotations Target="SalesService.Product">
+                <Annotation Term="Capabilities.Updatable" Bool="false"/>
+            </Annotations>
+            <Annotations Target="SalesService.EntityContainer/Product">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SalesService.EntityContainer/OrderedProduct">
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
