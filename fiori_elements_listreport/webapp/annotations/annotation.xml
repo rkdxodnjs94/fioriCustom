@@ -11,12 +11,12 @@
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="serialNumber"/>
-                            <PropertyValue Property="Value" Path="serialNumber"/>
-                        </Record>
-                        <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="orderNumber"/>
                             <PropertyValue Property="Value" Path="orderNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="serialNumber"/>
+                            <PropertyValue Property="Value" Path="serialNumber"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="name"/>
@@ -40,6 +40,14 @@
                             <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#deliveryTime"/>
                             <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                         </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="countryCode"/>
+                            <PropertyValue Property="Value" Path="countryCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="foundingYear"/>
+                            <PropertyValue Property="Value" Path="foundingYear"/>
+                        </Record>                
                     </Collection>
                 </Annotation>
 
@@ -90,6 +98,14 @@
                                     <PropertyValue Property="Label" String="orderDate"/>
                                     <PropertyValue Property="Value" Path="orderDate"/>
                                 </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="countryCode"/>
+                                    <PropertyValue Property="Value" Path="countryCode"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="foundingYear"/>
+                                    <PropertyValue Property="Value" Path="foundingYear"/>
+                                </Record>                                                                                        
                             </Collection>
                         </PropertyValue>
                     </Record>
